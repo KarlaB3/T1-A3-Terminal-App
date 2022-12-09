@@ -51,3 +51,14 @@ def existing_diary():
 
 
 #
+def new_diary():
+    import pandas as pd
+    diary_name = input("Create a new diary. Please enter a diary name in lower case: ")
+    dataframe = pd.DataFrame(list())
+    dataframe.to_csv(diary_name + '.csv')
+    if FileExistsError:
+        print("Diary already exists. Enter another diary name in lower case when prompted.")
+        new_diary()
+    else:
+        print("Thank you, your diary named " + diary_name + " has been created.")
+    pass
