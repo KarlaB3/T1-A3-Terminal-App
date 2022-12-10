@@ -12,7 +12,7 @@ def initial_test_2():
     initial_options()
     initial_selections()
     input = "2"
-    assert existing_confirmed == ["Create a new diary. Please enter a diary name that is maximum 6 characters long: "]
+    assert existing_confirmedoutput == ["Create a new diary. Please enter a diary name that is maximum 6 characters long: "]
 
 def initial_test_3():
     initial_options()
