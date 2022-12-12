@@ -1,10 +1,19 @@
-,breakfast,lunch,dinner,snack,date
-0,eggs,sandwich,soup,fruit,<function today_date at 0x7f2e434b0940>
-,breakfast,lunch,dinner,snack,date
-0,eggs,sandwich,soup,fruit,<function today_date at 0x7fd870cd4940>
-,breakfast,lunch,dinner,snack,date
-0,steak,eggs,fkdkd,bhhb,<function today_date at 0x7f447c1e4940>
-,breakfast,lunch,dinner,snack
-0,blah,blahb,albh,blah
-,breakfast,lunch,dinner,snack
-0,1,3,2,5
+date,breakfast,lunch,dinner,snack
+12/12/2022,oats,curry and rice,salad,smoothie
+date,yoghurt,lunch,dinner,snack
+,oats,steak & fries,salad,soup
+8/12/2022,oats,quiche,lamb cutlets,none
+9/12/2022,oats,burger and fries,fish and chips,milkshake
+10/12/2022,oats,salad,ramen,nuts
+11/12/2022,oats,fish and chips,sashimi and salad,chips
+12/12/2022,oats,sandwich,steak and salad,carrots and hummus
+12-12-22,granola,lunch,steak,soup
+12-12-22,granola,sandwich,steak,soup
+12-12-22,granola,steak,steak,soup
+12-12-22,granola,sandwich,steak,soup
+12-12-22,granola,salad,steak,soup
+12-12-22,granola,sandwich,steak,soup
+12-12-22,eggs,soup,steak,soup
+12-12-22,eggs,sandwich,steak,soup
+12-12-22,oats,sandwich,salad,soup
+12-12-22,smoothie,salad,chicken and rice,fruit

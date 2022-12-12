@@ -1,43 +1,51 @@
-print("Would you like to save today's meals into an existing diary, or create and save a new diary? \nWhen prompted, please enter the number that corresponds with your selection.")
+def today_date():
+    from datetime import date
+    date_today = date.today()
+    return date_today.strftime('%d-%m-%y')
 
-def diary_options():
-    print("1: Save to Existing Diary")
-    print("2: Create and Save to New Diary")
+def meal_input():
+    print("Enter today's meals when prompted.")
+    breakast_input = ''
+    while True:
+        breakfast_input = input("Enter breakfast: ")
+        if breakfast_input:
+            break
+    lunch_input = ''
+    while True:
+        lunch_input = input("Enter lunch: ")
+        if lunch_input:
+            break
+    dinner_input = ''
+    while True:
+        dinner_input = input("Enter dinner: ")
+        if dinner_input:
+            break
+    snack_input = ''
+    while True:
+        snack_input = input("Enter snack: ")
+        if snack_input:
+            break
+    date_input = today_date
+        #need error handling for input that is not a string or word, only numbers.
+    breakfast_list = [breakfast_input]
+    lunch_list = [lunch_input]
+    dinner_list = [dinner_input]
+    snack_list = [snack_input]
+    date_list = [date_input()]
+      
+    meals_dict = {'date': date_list, 'breakfast': breakfast_list, 'lunch': lunch_list, 'dinner': dinner_list, 'snack': snack_list}
+    print(meals_dict)
+    return meals_dict
 
-def diary_selections():
-    selection_input = input("Please enter the number that corresponds with your selection: ")
-    if selection_input == "1":
-        existing_diary()
-    elif selection_input == "2":
-        new_diary()
-    else:
-        print("What you've selected isn't recognised. Please try again.")
-        diary_options()
-        diary_selections()
+today_date()
+meal_input()
 
-#created new diary with today's meals
-#now I just have to rename the file and append the diary data?
 
-def existing_diary():
-    import pandas as pd
-    existing_name = input("Access your diary by entering the diary name: ")
-    df = pd.read_csv(existing_name + '.csv')
-    df.to_csv(existing_name + '.csv', mode='a')
-    print("Today's meals have been saved.")
-    
-def new_diary():
-    import pandas as pd
-    new_name = input("Create a new diary. Please enter a diary name in lower case: ")
-    df = pd.DataFrame (dict)
-    try:
-        df.to_csv(new_name + '.csv', mode="x")
-        df = pd.read_csv(new_name + '.csv')
-        df.to_csv(new_name + '.csv', mode='a')
-    except FileExistsError:
-        print("This diary name already exists. Please enter a new diary name when prompted.")
-        new_diary()
 
-diary_options()
-diary_selections()
-existing_diary()
-new_diary()
+name = ''
+# Start a loop that will run until the user give input
+while True:
+    name = input("Enter Name to exist: ")
+    if name:
+        print(name)
+        break

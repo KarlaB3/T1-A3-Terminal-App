@@ -19,3 +19,5 @@ def initial_test_3():
     initial_selections()
     input = "x"
     assert output == ["What you've selected isn't recognised. Please try again."]
+
+
