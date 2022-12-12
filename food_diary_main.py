@@ -1,7 +1,8 @@
 #Upon executing the program users are prompted to enter their meals.
-print("Welcome to your food diary! Easily track your meals each day.")
+from termcolor import colored
+print(colored("Welcome to your food diary! Easily track your meals each day.", 'blue'))
 #add some other instructions. i.e. follow the prompts and features.
-print("Enter today's meals - breakfast, lunch, dinner and snack - when prompted.")
+print(colored("Enter today's meals - breakfast, lunch, dinner and snack - when prompted.", 'blue'))
 
 def today_date():
     from datetime import date
@@ -41,17 +42,19 @@ def meal_input():
     return meals_dict
 
 def add_input(meals_dict):
+    from termcolor import colored
     import pandas as pd
     df = pd.DataFrame (meals_dict)
     try:
         df.to_csv('diary.csv', index=False, header=True, mode="x")
     except FileExistsError:
         df.to_csv('diary.csv', index=False, header=False, mode="a")
-    print("Today's meals have been saved.")
+    print(colored("Today's meals have been saved.", 'green'))
     return df
 
 def additional_options():
-    print("Here are some additional diary features. When prompted, enter the number corresponding to your selection: ")
+    from termcolor import colored
+    print(colored("Here are some additional diary features. When prompted, enter the number corresponding to your selection: ", 'blue'))
     from prettytable import PrettyTable
     options_table = PrettyTable (["Number", "Feature"])
     options_table.add_row(["1", "Edit today's meals"])
@@ -60,20 +63,22 @@ def additional_options():
     print(options_table)
 
 def additional_selections():
+    from termcolor import colored
     selection_input = input("Enter your selection: ")
     if selection_input == "1":
         edit_diary()
     elif selection_input == "2":
         view_diary()
     elif selection_input == "3":
-        print("Thanks for using the food diary. Come back tomorrow to input and track your meals.")
+        print(colored("Thanks for using the food diary. Come back tomorrow to input and track your meals.", 'blue'))
         quit()
     else:
-        print("Your selection isn't recognised. Please try again.")
+        print(colored("Your selection isn't recognised. Please try again.", 'red'))
         additional_options()
         additional_selections()
 
 def edit_diary():
+    from termcolor import colored
     import pandas as pd
     edit_today = input("Enter meal to edit: ")
     if edit_today == "breakfast":
@@ -81,7 +86,7 @@ def edit_diary():
         df = pd.read_csv('diary.csv', index_col='date')
         df.loc[today_date(), 'breakfast'] = edit_breakfast
         df.to_csv('diary.csv')
-        print("Today's breakfast has been edited.")
+        print(colored("Today's breakfast has been edited.", 'green'))
         additional_options()
         additional_selections()
     elif edit_today == "lunch":
@@ -89,7 +94,7 @@ def edit_diary():
         df = pd.read_csv('diary.csv', index_col='date')
         df.loc[today_date(), 'lunch'] = edit_lunch
         df.to_csv('diary.csv')
-        print("Today's lunch has been edited.")
+        print(colored("Today's lunch has been edited.", 'green'))
         additional_options()
         additional_selections()
     elif edit_today == "dinner":
@@ -97,7 +102,7 @@ def edit_diary():
         df = pd.read_csv('diary.csv', index_col='date')
         df.loc[today_date(), 'dinner'] = edit_dinner
         df.to_csv('diary.csv')
-        print("Today's dinner has been edited.")
+        print(colored("Today's dinner has been edited.", 'green'))
         additional_options()
         additional_selections()
     elif edit_today == "snack":
@@ -105,15 +110,15 @@ def edit_diary():
         df = pd.read_csv('diary.csv', index_col='date')
         df.loc[today_date(), 'snack'] = edit_snack
         df.to_csv('diary.csv')
-        print("Today's snack has been edited.")
+        print(colored("Today's snack has been edited.", 'green'))
         additional_options()
         additional_selections()
     else:
-        print("Your input isn't recognised. Please try again.")
+        print(colored("Your input isn't recognised. Please try again.", 'red'))
         edit_diary()
 
 def view_diary():
-    print("Here's your food diary.")
+    print(colored("Here's your food diary.", 'blue'))
     from prettytable import PrettyTable
     table_view = PrettyTable()
     from prettytable import from_csv

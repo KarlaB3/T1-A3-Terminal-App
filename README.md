@@ -12,7 +12,7 @@ View the Trello project management board here: https://trello.com/b/TwGduS2x/t1a
 
 Tech Stack:
 * Python source code, using the PEP8 styling convention written in Visual Studio Code.
-* Python libraries: 
+* Python libraries: pandas for creating dataframes and writing and reading csv diary file, termcolor for coloured text (green - confirmations, blue - instructions, red - errors), datetime for calling today's date, prettytable for viewing options and also the diary in table format in the terminal window.
 * Markdown ReadMe file written in Visual Studio Code.
 * GitHub for managing source code changes and tracking and controlling versions of the source code.
 
@@ -24,14 +24,20 @@ List and describe three features. these features must demonstrate understanding 
 - loops and conditional control structures
 - error handling
 
-**Feature 1**
-lorem ipsum
+Meal Input
+- variables and variable scope
+- loops and conditional control structures
+- error handling
 
-**Feature 2**
-lorem ipsum
+Read and Write to CSV
+- variables and variable scope
+- loops and conditional control structures
+- error handling
 
-**Feature 3**
-lorem ipsum
+View Diary
+- variables and variable scope
+- loops and conditional control structures
+- error handling
 
 ## Implementation Plan
 - outlines how each feature will be implemented and a checklist of tasks for each feature
