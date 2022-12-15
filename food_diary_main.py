@@ -11,7 +11,7 @@ def today_date():
     date_today = date.today()
     return date_today.strftime('%d-%m-%y')
 
-# Function for user to input meals. If there is a blank entry, users will see the prompt until they input the meal. Meals are then saved to a dictonary.
+# User to input meals. If there is a blank entry, users will see the prompt until they input the meal. Meals are then saved to a dictonary.
 def meal_input():
     breakast_input = ''
     while True:
@@ -34,16 +34,17 @@ def meal_input():
         if snack_input:
             break
     date_input = today_date
-        #need error handling for input that is not a string or word, only numbers.
+        # need error handling for input that is not a string or word, only numbers.
     breakfast_list = [breakfast_input]
     lunch_list = [lunch_input]
     dinner_list = [dinner_input]
     snack_list = [snack_input]
     date_list = [date_input()]
     meals_dict = {'date': date_list, 'breakfast': breakfast_list, 'lunch': lunch_list, 'dinner': dinner_list, 'snack': snack_list}
-    print(meals_dict)
+    print(meals_dict) # don't forget to remove this
     return meals_dict
 
+# Save the meals dictionary into a .csv file
 def add_input(meals_dict):
     from termcolor import colored
     import pandas as pd
@@ -55,6 +56,7 @@ def add_input(meals_dict):
     print(colored("Today's meals have been saved.", 'green'))
     return df
 
+# Print out options for additional features: edit today's meals, view diary, exit the program.
 def additional_options():
     from termcolor import colored
     print(colored("Here are some additional diary features. When prompted, enter the number corresponding to your selection: ", 'blue'))
