@@ -99,7 +99,6 @@ def yesterday_meal_input():
         if snack_input:
             break
     yesterday_input = yesterday_date
-        # need error handling for input that is not a string or word, only numbers.
     breakfast_list = [breakfast_input]
     lunch_list = [lunch_input]
     dinner_list = [dinner_input]
@@ -179,7 +178,7 @@ def edit_diary():
 
 # Diary is printed in table form on the screen.
 def view_diary():
-    print(colored("Here's your food diary.", 'blue'))
+    print(colored("Here's your food diary:", 'blue'))
     from prettytable import PrettyTable
     table_view = PrettyTable()
     from prettytable import from_csv

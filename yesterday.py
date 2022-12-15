@@ -64,20 +64,6 @@ def yesterday_date():
     date_yesterday = date_today - timedelta(days = 1)
     return date_yesterday.strftime('%d-%m-%y')
 
-# Check if user inputted yesterday's meals. If there is no input from yesterday, prompt user to enter meals. If there is input from yesterday move on to additional features.
-def yesterday_check():
-    import pandas as pd
-    df = pd.read_csv('diary.csv')
-    if yesterday_date in df.values:
-        additional_options()
-        additional_selections()
-    else:
-        print(colored("You didn't input yesterday's meals. When prompted, enter yesterday's meals - breakfast, lunch, dinner, snack.", 'red'))
-        yesterday_meal_input()
-        add_input(meals_dict)
-        additional_options()
-        additional_selections()
-
 # User to input meals. If there is a blank entry, users will see the prompt until they input the meal. Meals are then saved to a dictonary.
 def yesterday_meal_input():
     breakast_input = ''
@@ -107,17 +93,31 @@ def yesterday_meal_input():
     dinner_list = [dinner_input]
     snack_list = [snack_input]
     yesterday_date_list = [yesterday_input()]
-    meals_dict = {'date': yesterday_date_list, 'breakfast': breakfast_list, 'lunch': lunch_list, 'dinner': dinner_list, 'snack': snack_list}
-    print(meals_dict) # don't forget to remove this
-    return meals_dict
+    yesterday_meals_dict = {'date': yesterday_date_list, 'breakfast': breakfast_list, 'lunch': lunch_list, 'dinner': dinner_list, 'snack': snack_list}
+    print(yesterday_meals_dict) # don't forget to remove this
+    return yesterday_meals_dict
 
-def yesterday_input(meals_dict):
+def add_yesterday(yesterday_meals_dict):
     import pandas as pd
     from termcolor import colored
-    df = pd.DataFrame (meals_dict)
+    df = pd.DataFrame (yesterday_meals_dict)
     df.to_csv('diary.csv', index=False, header=False, mode="a")
     print(colored("Yesterday's meals have been saved.", 'green'))
     return df
+
+# Check if user inputted yesterday's meals. If there is no input from yesterday, prompt user to enter meals. If there is input from yesterday move on to additional features.
+def yesterday_check():
+    import pandas as pd
+    df = pd.read_csv('diary.csv')
+    if yesterday_date in df.values:
+        additional_options()
+        additional_selections()
+    else:
+        print(colored("You didn't input yesterday's meals. When prompted, enter yesterday's meals - breakfast, lunch, dinner, snack.", 'red'))
+        yesterday_meals_dict = yesterday_meal_input()
+        add_yesterday(yesterday_meals_dict)
+        additional_options()
+        additional_selections()
 
 # Print out options for additional features: edit today's meals, view diary, exit the program.
 def additional_options():
@@ -204,10 +204,9 @@ meals_dict = meal_input()
 add_input(meals_dict)
 yesterday_date()
 yesterday_check()
-meals_dict = meal_input()
-yesterday_input(meals_dict)
+yesterday_meals_dict = yesterday_meal_input()
+add_yesterday(yesterday_meals_dict)
 additional_options()
 additional_selections()
 edit_diary()
 view_diary()
-
