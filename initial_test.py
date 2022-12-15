@@ -20,4 +20,3 @@ def initial_test_3():
     input = "x"
     assert output == ["What you've selected isn't recognised. Please try again."]
 
-

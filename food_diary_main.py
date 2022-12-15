@@ -56,6 +56,71 @@ def add_input(meals_dict):
     print(colored("Today's meals have been saved.", 'green'))
     return df
 
+# Return yesterday's date
+def yesterday_date():
+    from datetime import date
+    from datetime import timedelta
+    date_today = date.today()
+    date_yesterday = date_today - timedelta(days = 1)
+    return date_yesterday.strftime('%d-%m-%y')
+
+# Check if user inputted yesterday's meals. If there is no input from yesterday, prompt user to enter meals. If there is input from yesterday move on to additional features.
+def yesterday_check():
+    import pandas as pd
+    df = pd.read_csv('diary.csv')
+    if yesterday_date in df.values:
+        additional_options()
+        additional_selections()
+    else:
+        print(colored("You didn't input yesterday's meals. When prompted, enter yesterday's meals - breakfast, lunch, dinner, snack.", 'red'))
+        yesterday_meal_input()
+        add_yesterday_input(yesterday_meals_dict)
+
+# User to input meals. If there is a blank entry, users will see the prompt until they input the meal. Meals are then saved to a dictonary.
+def yesterday_meal_input():
+    yesterday_breakast_input = ''
+    while True:
+        yesterday_breakfast_input = input("Enter yesterday's breakfast: ")
+        if yesterday_breakfast_input:
+            break
+    yesterday_lunch_input = ''
+    while True:
+        yesterday_lunch_input = input("Enter yesterday's lunch: ")
+        if yesterday_lunch_input:
+            break
+    yesterday_dinner_input = ''
+    while True:
+        yesterday_dinner_input = input("Enter yesterday's dinner: ")
+        if yesterday_dinner_input:
+            break
+    yesterday_snack_input = ''
+    while True:
+        yesterday_snack_input = input("Enter yesterday's snack: ")
+        if yesterday_snack_input:
+            break
+    yesterday_input = yesterday_date
+        # need error handling for input that is not a string or word, only numbers.
+    yesterday_breakfast_list = [yesterday_breakfast_input]
+    yesterday_lunch_list = [yesterday_lunch_input]
+    yesterday_dinner_list = [yesterday_dinner_input]
+    yesterday_snack_list = [yesterday_snack_input]
+    yesterday_date_list = [yesterday_input()]
+    yesterday_meals_dict = {'date': yesterday_date_list, 'breakfast': yesterday_breakfast_list, 'lunch': yesterday_lunch_list, 'dinner': yesterday_dinner_list, 'snack': yesterday_snack_list}
+    print(yesterday_meals_dict) # don't forget to remove this
+    return yesterday_meals_dict
+
+# Save yesterday's meals dictionary into a .csv file
+def add_yesterday_input(yesterday_meals_dict):
+    from termcolor import colored
+    import pandas as pd
+    df = pd.DataFrame (yesterday_meals_dict)
+    try:
+        df.to_csv('diary.csv', index=False, header=True, mode="x")
+    except FileExistsError:
+        df.to_csv('diary.csv', index=False, header=False, mode="a")
+    print(colored("Yesterday's meals have been saved.", 'green'))
+    return df
+
 # Print out options for additional features: edit today's meals, view diary, exit the program.
 def additional_options():
     from termcolor import colored
@@ -139,7 +204,12 @@ def view_diary():
 today_date()
 meals_dict = meal_input()
 add_input(meals_dict)
+yesterday_date()
+yesterday_check()
+yesterday_meals_dict = yesterday_meal_input()
+add_yesterday_input(yesterday_meals_dict)
 additional_options()
 additional_selections()
 edit_diary()
 view_diary()
+
