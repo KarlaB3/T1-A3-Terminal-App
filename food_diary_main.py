@@ -68,13 +68,15 @@ def yesterday_date():
 def yesterday_check():
     import pandas as pd
     df = pd.read_csv('diary.csv')
-    if yesterday_date in df.values:
+    if yesterday_date() in df['date'].values:
         additional_options()
         additional_selections()
     else:
         print(colored("You didn't input yesterday's meals. When prompted, enter yesterday's meals - breakfast, lunch, dinner, snack.", 'red'))
-        yesterday_meal_input()
+        meals_dict = yesterday_meal_input()
         add_input(meals_dict)
+        additional_options()
+        additional_selections()
 
 # User to input meals. If there is a blank entry, users will see the prompt until they input the meal. Meals are then saved to a dictonary.
 def yesterday_meal_input():
@@ -193,7 +195,7 @@ meals_dict = meal_input()
 add_input(meals_dict)
 yesterday_date()
 yesterday_check()
-meals_dict = meal_input()
+meals_dict = yesterday_meal_input()
 add_input(meals_dict)
 additional_options()
 additional_selections()
