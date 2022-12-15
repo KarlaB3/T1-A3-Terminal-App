@@ -67,6 +67,7 @@ def additional_options():
     options_table.add_row(["3", "Exit session"])
     print(options_table)
 
+# Actions for additional features.
 def additional_selections():
     from termcolor import colored
     selection_input = input("Enter your selection: ")
@@ -82,6 +83,7 @@ def additional_selections():
         additional_options()
         additional_selections()
 
+# Users can edit today's meal input. Edited input is then saved to .csv file.
 def edit_diary():
     import pandas as pd
     from termcolor import colored
@@ -122,6 +124,7 @@ def edit_diary():
         print(colored("Your input isn't recognised. Please try again.", 'red'))
         edit_diary()
 
+# Diary is printed in table form on the screen.
 def view_diary():
     print(colored("Here's your food diary.", 'blue'))
     from prettytable import PrettyTable
