@@ -1,14 +1,17 @@
-#Upon executing the program users are prompted to enter their meals.
+# Upon executing the program users are prompted to enter today's meals.
+
 from termcolor import colored
 print(colored("Welcome to your food diary! Easily track your meals each day.", 'blue'))
 #add some other instructions. i.e. follow the prompts and features.
 print(colored("Enter today's meals - breakfast, lunch, dinner and snack - when prompted.", 'blue'))
 
+# Function to call today's date
 def today_date():
     from datetime import date
     date_today = date.today()
     return date_today.strftime('%d-%m-%y')
 
+# Function for user to input meals. If there is a blank entry, users will see the prompt until they input the meal. Meals are then saved to a dictonary.
 def meal_input():
     breakast_input = ''
     while True:
@@ -78,8 +81,8 @@ def additional_selections():
         additional_selections()
 
 def edit_diary():
-    from termcolor import colored
     import pandas as pd
+    from termcolor import colored
     edit_today = input("Enter meal to edit: ")
     if edit_today == "breakfast":
         edit_breakfast = input("Enter new breakfast: ")
