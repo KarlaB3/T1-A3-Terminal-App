@@ -10,8 +10,8 @@ def today_date():
 
 # Check whether the user has already inputted meals for today. If yes, additional options are presented to edit today's meals, view diary or exit.
 def today_check():
-    from termcolor import colored
     import pandas as pd
+    from termcolor import colored
     df = pd.read_csv('diary.csv')
     if today_date() in df['date'].values:
         print(colored("You've already entered your meals for the day.", 'green'))
@@ -58,8 +58,8 @@ def meal_input():
 
 # Save the meals dictionary into a .csv file
 def add_input(meals_dict):
-    from termcolor import colored
     import pandas as pd
+    from termcolor import colored
     df = pd.DataFrame (meals_dict)
     try:
         df.to_csv('diary.csv', index=False, header=True, mode="x")
@@ -215,6 +215,8 @@ today_date()
 today_check()
 meals_dict = meal_input()
 add_input(meals_dict)
+additional_options()
+additional_selections()
 yesterday_date()
 yesterday_check()
 meals_dict = yesterday_meal_input()
