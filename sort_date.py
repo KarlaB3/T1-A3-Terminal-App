@@ -19,8 +19,8 @@ def today_check():
     except FileNotFoundError:
         meals_dict = meal_input()
         add_input(meals_dict)
-    additional_options()
-    additional_selections()
+    yesterday_check()
+    yesterday_date()
 
 # User to input today's meals. If there is a blank entry, users will be prompted until an entry is made. Meals are then saved to a dictonary.
 def meal_input():
@@ -67,6 +67,7 @@ def add_input(meals_dict):
     except FileExistsError:
         df.to_csv('diary.csv', index=False, header=False, mode="a")
     print(colored("Your meals have been saved.", 'green'))
+    sort_input()
     return df
 
 # Sort the meals .csv file in ascending date order
@@ -75,7 +76,6 @@ def sort_input():
     df = pd.read_csv('diary.csv')
     df.sort_values(by=['date'], ascending=True, inplace=True)
     df.to_csv('diary.csv')
-    return df
 
 # Call yesterday's date for later use
 def yesterday_date():
@@ -96,8 +96,6 @@ def yesterday_check():
         print(colored("You didn't input yesterday's meals. When prompted, enter yesterday's meals - breakfast, lunch, dinner, snack.", 'red'))
         meals_dict = yesterday_meal_input()
         add_input(meals_dict)
-        additional_options()
-        additional_selections()
 
 # User to input meals. If there is a blank entry, users will see the prompt until they input the meal. Meals are then saved to a dictonary.
 def yesterday_meal_input():
@@ -141,6 +139,7 @@ def additional_options():
     options_table.add_row(["2", "View diary"])
     options_table.add_row(["3", "Exit session"])
     print(options_table)
+    additional_selections()
 
 # Actions for additional features.
 def additional_selections():
@@ -210,12 +209,9 @@ today_date()
 today_check()
 meals_dict = meal_input()
 add_input(meals_dict)
-additional_options()
-additional_selections()
 yesterday_date()
 yesterday_check()
 meals_dict = yesterday_meal_input()
-add_input(meals_dict)
 sort_input()
 additional_options()
 additional_selections()

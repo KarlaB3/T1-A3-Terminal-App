@@ -127,7 +127,7 @@ def yesterday_meal_input():
     snack_list = [snack_input]
     yesterday_date_list = [yesterday_input()]
     meals_dict = {'date': yesterday_date_list, 'breakfast': breakfast_list, 'lunch': lunch_list, 'dinner': dinner_list, 'snack': snack_list}
-    print(meals_dict) # don't forget to remove this
+    print(meals_dict)
     return meals_dict
 
 # Print out options for additional features: edit today's meals, view diary, exit the program.
