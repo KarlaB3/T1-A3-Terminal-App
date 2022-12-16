@@ -198,7 +198,7 @@ def edit_diary():
         print(colored("Your input isn't recognised. Please try again.", 'red'))
         edit_diary()
 
-# Diary is printed in table form on the screen.
+# Diary is printed in table format on the screen.
 def view_diary():
     from termcolor import colored
     print(colored("Here's your food diary:", 'blue'))
@@ -213,7 +213,6 @@ def view_diary():
 
 today_date()
 today_check()
-introduction()
 meals_dict = meal_input()
 add_input(meals_dict)
 yesterday_date()

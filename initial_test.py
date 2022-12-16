@@ -1,22 +1,19 @@
-#test output when users enter a selection on the welcome page
 import pytest
-from food_diary_main import initial_options, initial_selections
 
-def initial_test_1():
-    initial_options()
-    initial_selections()
-    input = "1"
-    assert output == ["Open your diary by entering the diary name: "]
+import datetime
 
-def initial_test_2():
-    initial_options()
-    initial_selections()
-    input = "2"
-    assert existing_confirmedoutput == ["Create a new diary. Please enter a diary name that is maximum 6 characters long: "]
+FAKE_TIME = datetime.datetime(2020, 12, 25, 17, 5, 55)
 
-def initial_test_3():
-    initial_options()
-    initial_selections()
-    input = "x"
-    assert output == ["What you've selected isn't recognised. Please try again."]
+@pytest.fixture
+def patch_datetime_now(monkeypatch):
 
+    class mydatetime:
+        @classmethod
+        def now(cls):
+            return FAKE_TIME
+
+    monkeypatch.setattr(datetime, 'datetime', mydatetime)
+
+
+def test_patch_datetime(patch_datetime_now):
+    assert datetime.datetime.now() == FAKE_TIME

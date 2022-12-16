@@ -1,30 +1,18 @@
-# Introductory message
-from termcolor import colored
-print(colored("Welcome to your food diary where you can easily track your meals each day.", 'blue'))
+# Upon executing the program users are prompted to enter today's meals.
 
-# Call today's date for later use
+from termcolor import colored
+print(colored("Welcome to your food diary! Easily track your meals each day.", 'blue'))
+#add some other instructions. i.e. follow the prompts and features.
+print(colored("Enter today's meals - breakfast, lunch, dinner and snack - when prompted.", 'blue'))
+
+# Function to call today's date
 def today_date():
     from datetime import date
     date_today = date.today()
     return date_today.strftime('%d-%m-%y')
 
-# Check whether the user has already inputted meals for today. If yes, additional options are presented to edit today's meals, view diary or exit.
-def today_check():
-    from termcolor import colored
-    import pandas as pd
-    df = pd.read_csv('diary.csv')
-    if today_date() in df['date'].values:
-        print(colored("You've already entered your meals for the day.", 'green'))
-        additional_options()
-        additional_selections()
-    else:
-        meals_dict = meal_input()
-        add_input(meals_dict)
-
-# User to input today's meals. If there is a blank entry, users will be prompted until an entry is made. Meals are then saved to a dictonary.
+# User to input meals. If there is a blank entry, users will see the prompt until they input the meal. Meals are then saved to a dictonary.
 def meal_input():
-    from termcolor import colored
-    print(colored("Enter today's meals - breakfast, lunch, dinner and snack - when prompted.", 'blue'))
     breakast_input = ''
     while True:
         breakfast_input = input("Enter breakfast: ")
@@ -68,15 +56,7 @@ def add_input(meals_dict):
     print(colored("Your meals have been saved.", 'green'))
     return df
 
-# Sort the meals .csv file in ascending date order
-def sort_input():
-    import pandas as pd
-    df = pd.read_csv('diary.csv')
-    df.sort_values(by=['date'], ascending=True, inplace=True)
-    df.to_csv('diary.csv')
-    return df
-
-# Call yesterday's date for later use
+# Return yesterday's date
 def yesterday_date():
     from datetime import date
     from datetime import timedelta
@@ -84,7 +64,7 @@ def yesterday_date():
     date_yesterday = date_today - timedelta(days = 1)
     return date_yesterday.strftime('%d-%m-%y')
 
-# Check if user inputted yesterday's meals. If there is no input from yesterday, users are prompted to enter meals. If there is input from yesterday users will move on to view and select additional features.
+# Check if user inputted yesterday's meals. If there is no input from yesterday, prompt user to enter meals. If there is input from yesterday move on to additional features.
 def yesterday_check():
     import pandas as pd
     df = pd.read_csv('diary.csv')
@@ -198,9 +178,8 @@ def edit_diary():
         print(colored("Your input isn't recognised. Please try again.", 'red'))
         edit_diary()
 
-# Diary is printed in table format on the screen.
+# Diary is printed in table form on the screen.
 def view_diary():
-    from termcolor import colored
     print(colored("Here's your food diary:", 'blue'))
     from prettytable import PrettyTable
     table_view = PrettyTable()
@@ -212,17 +191,14 @@ def view_diary():
     additional_selections()
 
 today_date()
-today_check()
 meals_dict = meal_input()
 add_input(meals_dict)
 yesterday_date()
 yesterday_check()
 meals_dict = yesterday_meal_input()
 add_input(meals_dict)
-sort_input()
 additional_options()
 additional_selections()
 edit_diary()
 view_diary()
-
 
