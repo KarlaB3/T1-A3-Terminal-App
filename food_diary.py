@@ -67,15 +67,7 @@ def add_input(meals_dict):
     except FileExistsError:
         df.to_csv('diary.csv', index=False, header=False, mode="a")
     print(colored("Your meals have been saved.", 'green'))
-    sort_input()
     return df
-
-# Sort the meals .csv file in ascending date order
-def sort_input():
-    import pandas as pd
-    df = pd.read_csv('diary.csv')
-    df.sort_values(by=['date'], ascending=True, inplace=True)
-    df.to_csv('diary.csv')
 
 # Call yesterday's date for later use
 def yesterday_date():
@@ -96,6 +88,8 @@ def yesterday_check():
         print(colored("You didn't input yesterday's meals. When prompted, enter yesterday's meals - breakfast, lunch, dinner, snack.", 'red'))
         meals_dict = yesterday_meal_input()
         add_input(meals_dict)
+        additional_options()
+        additional_selections()
 
 # User to input meals. If there is a blank entry, users will see the prompt until they input the meal. Meals are then saved to a dictonary.
 def yesterday_meal_input():
@@ -161,7 +155,7 @@ def additional_selections():
 def edit_diary():
     import pandas as pd
     from termcolor import colored
-    edit_today = input("Enter meal to edit: ")
+    edit_today = input("Enter meal to edit (breakfast/lunch/dinner/snack): ")
     if edit_today == "breakfast":
         edit_breakfast = input("Enter new breakfast: ")
         df = pd.read_csv('diary.csv', index_col='date')
@@ -212,7 +206,6 @@ add_input(meals_dict)
 yesterday_date()
 yesterday_check()
 meals_dict = yesterday_meal_input()
-sort_input()
 additional_options()
 additional_selections()
 edit_diary()
