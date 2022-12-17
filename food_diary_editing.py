@@ -130,8 +130,9 @@ def additional_options():
     from prettytable import PrettyTable
     options_table = PrettyTable (["Number", "Feature"])
     options_table.add_row(["1", "Edit today's meals"])
-    options_table.add_row(["2", "View diary"])
-    options_table.add_row(["3", "Exit session"])
+    options_table.add_row(["2", "Edit yesterday's meals"])
+    options_table.add_row(["3", "View diary"])
+    options_table.add_row(["4", "Exit session"])
     print(options_table)
     additional_selections()
 
@@ -141,9 +142,11 @@ def additional_selections():
     selection_input = input("Enter your selection: ")
     if selection_input == "1":
         edit_diary()
-    elif selection_input == "2":
-        view_diary()
+    if selection_input == "2":
+        edit_yesterday_diary()
     elif selection_input == "3":
+        view_diary()
+    elif selection_input == "4":
         print(colored("Thanks for using the food diary. Come back tomorrow to input and track your meals.", 'blue'))
         quit()
     else:
@@ -155,34 +158,93 @@ def additional_selections():
 def edit_diary():
     import pandas as pd
     from termcolor import colored
-    edit_today = input("Enter meal to edit (breakfast/lunch/dinner/snack): ")
+    edit_today = input("Choose today's meal to edit (breakfast/lunch/dinner/snack): ")
     if edit_today == "breakfast":
-        edit_breakfast = input("Enter new breakfast: ")
-        df = pd.read_csv('diary.csv', index_col='date')
-        df.loc[today_date(), 'breakfast'] = edit_breakfast
-        df.to_csv('diary.csv')
-        print(colored("Today's breakfast has been edited.", 'green'))
+        edit_breakfast = ''
+        while True:
+            if edit_breakfast := input("Enter new breakfast: "):
+                df = pd.read_csv('diary.csv', index_col='date')
+                df.loc[today_date(), 'breakfast'] = edit_breakfast
+                df.to_csv('diary.csv')
+                print(colored("Today's breakfast has been edited.", 'green'))
+                break
     elif edit_today == "lunch":
-        edit_lunch = input("Enter new lunch: ")
-        df = pd.read_csv('diary.csv', index_col='date')
-        df.loc[today_date(), 'lunch'] = edit_lunch
-        df.to_csv('diary.csv')
-        print(colored("Today's lunch has been edited.", 'green'))
+        edit_lunch = ''
+        while True:
+            if edit_lunch := input("Enter new lunch: "):
+                df = pd.read_csv('diary.csv', index_col='date')
+                df.loc[today_date(), 'lunch'] = edit_lunch
+                df.to_csv('diary.csv')
+                print(colored("Today's lunch has been edited.", 'green'))
+                break
     elif edit_today == "dinner":
-        edit_dinner = input("Enter new dinner: ")
-        df = pd.read_csv('diary.csv', index_col='date')
-        df.loc[today_date(), 'dinner'] = edit_dinner
-        df.to_csv('diary.csv')
-        print(colored("Today's dinner has been edited.", 'green'))
+        edit_dinner = ''
+        while True:
+            if edit_dinner := input("Enter new dinner: "):
+                df = pd.read_csv('diary.csv', index_col='date')
+                df.loc[today_date(), 'dinner'] = edit_dinner
+                df.to_csv('diary.csv')
+                print(colored("Today's dinner has been edited.", 'green'))
+                break
     elif edit_today == "snack":
-        edit_snack = input("Enter new snack: ")
-        df = pd.read_csv('diary.csv', index_col='date')
-        df.loc[today_date(), 'snack'] = edit_snack
-        df.to_csv('diary.csv')
-        print(colored("Today's snack has been edited.", 'green'))
+        edit_snack = ''
+        while True:
+            if edit_snack := input("Enter new snack: "):
+                df = pd.read_csv('diary.csv', index_col='date')
+            df.loc[today_date(), 'snack'] = edit_snack
+            df.to_csv('diary.csv')
+            print(colored("Today's snack has been edited.", 'green'))
+            break
     else:
-        print(colored("Your input isn't recognised. Please try again.", 'red'))
+        print(colored("Your choice isn't recognised. Please try again.", 'red'))
         edit_diary()
+    additional_options()
+    additional_selections()
+
+# Users can edit yesterday's meal input. Edited input is then saved to .csv file.
+def edit_yesterday_diary():
+    import pandas as pd
+    from termcolor import colored
+    edit_yesterday = input("Choose yesterday's meal to edit (breakfast/lunch/dinner/snack): ")
+    if edit_yesterday == "breakfast":
+        edit_yesterday_breakfast = ''
+        while True:
+            if edit_yesterday_breakfast := input("Enter new breakfast: "):
+                df = pd.read_csv('diary.csv', index_col='date')
+                df.loc[yesterday_date(), 'breakfast'] = edit_yesterday_breakfast
+                df.to_csv('diary.csv')
+                print(colored("Yesterday's breakfast has been edited.", 'green'))
+                break
+    elif edit_yesterday == "lunch":
+        edit_yesterday_lunch = ''
+        while True:
+            if edit_yesterday_lunch := input("Enter new lunch: "):
+                df = pd.read_csv('diary.csv', index_col='date')
+                df.loc[yesterday_date(), 'lunch'] = edit_yesterday_lunch
+                df.to_csv('diary.csv')
+                print(colored("Yesterday's lunch has been edited.", 'green'))
+                break
+    elif edit_yesterday == "dinner":
+        edit_yesterday_dinner = ''
+        while True:
+            if edit_yesterday_dinner := input("Enter new dinner: "):
+                df = pd.read_csv('diary.csv', index_col='date')
+                df.loc[yesterday_date(), 'dinner'] = edit_yesterday_dinner
+                df.to_csv('diary.csv')
+                print(colored("Yesterday's dinner has been edited.", 'green'))
+                break
+    elif edit_yesterday == "snack":
+        edit_yesterday_snack = ''
+        while True:
+            if edit_yesterday_snack := input("Enter new snack: "):
+                df = pd.read_csv('diary.csv', index_col='date')
+            df.loc[yesterday_date(), 'snack'] = edit_yesterday_snack
+            df.to_csv('diary.csv')
+            print(colored("Yesterday's snack has been edited.", 'green'))
+            break
+    else:
+        print(colored("Your choice isn't recognised. Please try again.", 'red'))
+        edit_yesterday_diary()
     additional_options()
     additional_selections()
 
@@ -209,6 +271,7 @@ meals_dict = yesterday_meal_input()
 additional_options()
 additional_selections()
 edit_diary()
+edit_yesterday_diary()
 view_diary()
 
 
