@@ -23,8 +23,8 @@ View the presentation video here:
 **Project Management Board**  
 View the Trello project management board here: https://trello.com/b/TwGduS2x/t1a3-terminal-app
 
-**Testing Process**  
-View the manual test case procedures and results here: https://docs.google.com/spreadsheets/d/1VfLTricsIO6EEbugapw_jGdTI7tB39GkXV33-ZSg-Mg/edit?usp=sharing 
+**Testing**  
+View the manual test case scenarios and results in Google Docs: https://docs.google.com/spreadsheets/d/1VfLTricsIO6EEbugapw_jGdTI7tB39GkXV33-ZSg-Mg/edit?usp=sharing
 
 **Tech Stack:**
 * Python source code, using the PEP8 styling convention written in Visual Studio Code.
@@ -59,16 +59,17 @@ This feature utilises Pandas to convert the meal dictionary into a DataFrame whi
 
 When a user first runs the app, the add input function checks if a .csv file already exists. This ensures that meal data is not duplicated across multiple files, so the diary is stored in one place for easy viewing and editing. 
 
-If a diary .csv file does not exist yet, it is created and referenced later for reading and writing when inputting and editing meals. If a diary .csv file already exists, the program references this file for reading and writing when inputting and editing meals.
+If a diary .csv file does not exist, it is created and referenced later for reading and writing when inputting and editing meals. If a diary .csv file already exists, it is opened in 'append' mode and meals data is appended to the next blank row.
+
+A try except statement is used to handle the exception in this case. to check if the diary.csv file already exists. 
 
 Feature implementation plan in Trello:  
 ![csv read and write feature Trello implementation plan](./docs/csv-read-write-feature.png)
 
-
 **Editing Meals**  
 This feature utilises a today datetime function and Pandas to locate the row containing today's meals and then overwrite existing meal data in that row with what users have inputted.
 
-Users are given the option to edit a specific meal type - breakfast, lunch, dinner or snack. They must enter the correctly formatted value, otherwise they receive an error message that the input isn't recognised, and to try again. They are then prompted to enter the meal type of choice to edit.
+Users are given the option to edit a specific meal type - breakfast, lunch, dinner or snack. They must enter the correctly formatted value, otherwise they receive an error message that the input isn't recognised, and to try again. If else statements are used to handle the input errors in this case. Users are then prompted to enter the meal type of choice to edit.
 
 Once meals are edited, users are prompted to view additional diary features including viewing the diary or exiting the program.
 
@@ -106,30 +107,45 @@ The fifth and final stage was to package up all files and documentation into a .
 ![project plan stage 5](./docs/stage-5-completion.png) 
 
 ## Testing
-Manual testing was used to test two functions critical to ensuring the program runs as expected, and to improve the overall user experience. The Google Sheets testing documentation can be found here: https://docs.google.com/spreadsheets/d/1VfLTricsIO6EEbugapw_jGdTI7tB39GkXV33-ZSg-Mg/edit?usp=sharing and can also be accessed here: [link to file in docs]
+Prior to development manual testing was used to test two functions critical to ensuring the app runs as expected, and to improve the overall user experience. 
 
-**Test Case:**   
-What was your process?
-what were the results?
+Testing was documented in Google Sheets: https://docs.google.com/spreadsheets/d/1VfLTricsIO6EEbugapw_jGdTI7tB39GkXV33-ZSg-Mg/edit?usp=sharing 
 
-**Test Case:**   
-What was your process?
-what were the results?
+**Test Case: Meal input**   
+**Test Case:** Testing of today and yesterday meal input functions.  
+**Requirements:** Users are prompted to enter their meals for the day. If they have missed yesterday's input, they are prompted to enter yesterday's meals. Meals are then displayed on the screen with a confirmation message.  
+  	**Test type:** Unit test to ensure the meal input functions work as intended and captures and displays meal input and a confirmation message on the terminal screen.
+
+Three scenarios were tested:
+* *First time use*: where the user has never used the app before, they're prompted to enter today's meals in order of breakfast, lunch, dinner and snack, and the expected result is to display their inputted meals on the screen along with a confirmation message advising their input has been saved. The test failed where users did not input a meal, producing a blank value. The solution was to use a while loop to ensure meals are inputted before moving onto the next step.
+* *User has inputted yesterday's meals, but not today's meals*: users are prompted today's meals in order of breakfast, lunch, dinner and snack, and the expected result is to display their inputted meals on the screen along with a confirmation message advising their input has been saved. The test failed where users did not input a meal, producing a blank value. The solution was to use a while loop to ensure meals are inputted before moving onto the next step. 
+* *User has inputted today's meals, but not yesterday's meals*: once the user has inputted today's meals, the app checks that there is existing data for yesterday's meals. If there is no data for yesterday, users are prompted to enter yesterday's meals in order of breakfast, lunch, dinner and snack, and the expected result is to display their inputted meals on the screen along with a confirmation message advising their input has been saved. The test failed where users did not input a meal, producing a blank value. The solution was to use a while loop to ensure meals are inputted before moving onto the next step. 
+
+**Test Case: Save meals to .csv file**   
+**Test Case:** Testing of function to write meals to .csv file.  
+**Requirements:** Meals are inputted then saved as a meals dictionary. The meals dictionary is converted to a Pandas dataframe and saved as a .csv file ('diary.csv').  
+**Test type:** Unit test to ensure the function works as intended and saves meal input into a diary.csv file.
+
+Two scenarios were tested:
+* *First time use*: where the user has never used the app before, they're prompted to enter today's meals. Input is saved as a dictionary, then converted to a Pandas dataframe and saved as a .csv file ('diary.csv'). During first time use, the app creates the diary.csv and sets the columns: date, breakfast, lunch, dinner, snack.
+* *User has previously inputted meals*: Users are prompted to enter today's and/or yesterday's meals. Input is saved as a dictionary, then converted to a Pandas dataframe and saved as a .csv file ('diary.csv'). A FileExistsError initially occurred because the app did not check if a .csv file already existed. The solution was to use a try except statement to check if the file already exists. If hte file exists, it is opened in 'append' mode and meals data appended to the next blank row.
 
 # Help Documentation
 Dependencies:
-* Bash command line interface shell program.
+* Bash command line interface (CLI) shell program.
 * Python 3.
 
 Follow these instructions to successfully install and run the app:
-1. Download and unzip the .zip file titled 'KarlaBucoy-T1A3.zip'.
-2. Open your Bash command line interface (CLI) shell terminal.
-3. In the Bash CLI, navigate to the 'src' folder.
-4. Run the 'run_app.sh' script using the command 'bash run_app.sh'.
+1. Download the .zip file titled 'KarlaBucoy-T1A3.zip'.
+2. Unzip 'KarlaBucoy-T1A3.zip'. 
+2. Open your Bash CLI shell terminal.
+3. Navigate to where the 'KarlaBucoy-T1A3' unzipped directory is located using the 'cd' command.
+4. Navgiate to the the 'src' directory using the 'cd' command.
+4. Run the 'run_app.sh' script using 'bash run_app.sh' command.
 
-The script will do the following:
-* Check if you have the correct version of Python installed. If not, an error message will be displayed providing a link to download and install Python 3.
-* Create a virtual environment.
-* Activate a virtual environment.
-* Install Python packages via the 'requirements.txt' file.
-* Run the 'run_app.sh' script.
+The run_app script does the following:
+* Checks if you have the correct version of Python installed. If not, an error message will be displayed providing a link to download and install Python 3.
+* Creates a virtual environment.
+* Activates a virtual environment.
+* Installs the required Python packages via the 'requirements.txt' file.
+* Runs the 'food_diary.py' program.
