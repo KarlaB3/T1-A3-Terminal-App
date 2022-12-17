@@ -1,11 +1,11 @@
 # T1 A3 Food Diary Terminal App
-The purpose of this terminal app is to allow users to track their daily meals.
+The purpose of the Food Diary terminal app is to allow users to track their daily meals.
 
-The Food Diary app is targeted for users who want to form a daily habit around tracking their meals, and ensuring they stay on track with specific nutrition goals.
+The app is targeted for users who want to form a daily habit around recording their meals, and ensuring they stay on track with their food and nutrition goals.
 
 Users can input today's and yesterday's meals in the app and view their food diary in table format on the terminal screen. Users also have the opportunity to edit today's meals in case they have made a mistake or omitted information.
 
-*Note:* the app is designed to form a daily habit around tracking meals. Therefore, only today and yesterday's meals can be inputted. Users are unlikely to remember what they ate a week ago, let alone several days ago so it is unnecessary to include a function for entering and editing historic data past yesterday.
+*Note:* the app is designed to help users form a daily habit around recording meals. Therefore, only today and yesterday's meals can be inputted and edited. Users are unlikely to remember what they ate a week ago, let alone several days ago so it is unnecessary to include a function for entering and editing historic data past yesterday.
 
 **PEP8** styling conventions were used to ensure readability and consistency in code. This includes:
 * Indentation of 4 spaces per indentation level.
@@ -18,7 +18,7 @@ Users can input today's and yesterday's meals in the app and view their food dia
 View the Github repo here: https://github.com/KarlaB3/T1-A3-Terminal-App
 
 **Presentation Video**  
-View the presentation video here: 
+View the presentation video here: https://vimeo.com/782205831/1e393d3ebc
 
 **Project Management Board**  
 View the Trello project management board here: https://trello.com/b/TwGduS2x/t1a3-terminal-app
@@ -30,12 +30,12 @@ View the manual test case scenarios and results in Google Docs: https://docs.goo
 * Python source code, using the PEP8 styling convention written in Visual Studio Code.
 * Python libraries: 
     * Pandas for creating dataframes and reading and writing to the .csv diary file. 
-    * Datetime for calling today's and yesterday's date.
+    * Datetime for calling and returning today's and yesterday's date.
     * Prettytable for listing additional user options and to display the diary in table format in the terminal window.
     * Termcolor for coloured text to highlight important messages (green - confirmations, blue - instructions, red - errors).
 * Markdown ReadMe file written in Visual Studio Code.
 * GitHub for managing source code changes and tracking and controlling versions of the source code.
-* Bash .sh file to execute the program.
+* Bash .sh script to execute the program.
 
 # About The Project
 
